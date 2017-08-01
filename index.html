@@ -325,74 +325,28 @@
       
         
           
-            <p><strong>C语言中的数据类型</strong></p>
-<p><img src="/images/C语言中的数据类型.png" alt=""></p>
-<p>存在疑问，具体参考下面评论</p>
-<p><strong>变量的存储</strong></p>
-<p><img src="/images/变量的存储.png" alt=""> </p>
-<p><strong>变量实例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int b = 10;</div><div class="line">int a = 20;</div></pre></td></tr></table></figure>
-<ol>
-<li>内存由大到小寻址，优先分配内存地址较大的字节给变量。b的内存地址比a大</li>
-<li>每个变量都有地址：第一个字节的地址就是变量的地址</li>
-<li>查看内存地址用 &amp;</li>
-</ol>
-<p><strong>Scanf函数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int age;</div><div class="line">scanf(&quot;%d&quot;,&amp;age);</div></pre></td></tr></table></figure>
-<p>注意：%d读入十进制整数 %o读入八进制整数 %x或%X读入十六进制整数</p>
-<p>用scanf函数输入多个数据时，每个数值中间的分隔符是什么输入的时候就要输入什么，如果每个数值之间用空格隔开，我们在每输入一个整数后必须输入一个分割符，分隔符可以是空格、tab、回车。</p>
-<p>scanf的第一个参数中不要包含\n，比如scanf(“%d\n”, &amp;a); 这将导致scanf函数无法结束</p>
-<p><strong>算数运算</strong></p>
-<p>取余运算  两个整数相除之后的余数   %两侧只能是整数   正负性取决于%左侧的数值</p>
-<p>强制类型转换</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">double a = (double)(1 / 2);</div></pre></td></tr></table></figure>
-<p><strong>sizeof</strong></p>
-<p>作用：用来计算一个变量或者一个常量、一种数据类型所占的内存字节数。</p>
-<p>使用形式：sizeof( 变量\常量 )  sizeof 变量\常量  sizeof( 数据类型 )  </p>
-<p><strong>条件判断</strong></p>
-<p>在C语言中“任何非0值都为“真”，只有0才为“假”</p>
-<p>关系比较注意点：</p>
-<ul>
-<li>关系运算符中==、!=的优先级相等，&lt;、&lt;=、&gt;、&gt;=的优先级相等，且前者的优先级低于后者：2==3&gt;1</li>
-<li>关系运算符的结合方向为“从左往右”： 4&gt;3&gt;2</li>
-<li>关系运算符的优先级小于算术运算符：3+4&gt;8-2</li>
-</ul>
-<p><strong>逻辑运算</strong></p>
-<p>1、&amp;&amp;逻辑与</p>
-<p>1&gt;使用格式  条件A &amp;&amp; 条件B</p>
-<p>2&gt;运算结果  只有当条件A和条件B都成立时，结果才为1，也就是“真”，其他时候都为0，也就是“假”</p>
-<p>3&gt;运算过程  总是先判断条件A是否成立</p>
-<ul>
-<li>如果条件A成立，接着再判断条件B是否成立：如果条件B成立，“条件A &amp;&amp;条件B”的结果就为1，即“真”，如果条件B不成立，结果就为0，即“假”</li>
-<li>如果条件A不成立，就不会再去判断条件B是否成立：因为条件A已经不成立了，不管条件B如何，“条件A &amp;&amp;条件B”的结果肯定是0，也就是“假”</li>
-</ul>
-<p>4&gt;注意  </p>
-<ul>
-<li>若想判断a的值是否在(3, 5)范围内，千万不能写成3<a<5，因为关系运算符的结合方向为“从左往右”。比如a为2，它会先算3<a，也就是3<2，条件不成立，结果为0。再与5比较，即0<5，条件成立，结果为1。因此 3<a<5的结果为1，条件成立，也就是说当a的值为2时，a的值是在(3,="" 5)范围内的。这明显是不对的。正确的判断方法是：(a="">3) &amp;&amp; (a&lt;5)</a<5，因为关系运算符的结合方向为“从左往右”。比如a为2，它会先算3<a，也就是3<2，条件不成立，结果为0。再与5比较，即0<5，条件成立，结果为1。因此></li>
-<li>C语言规定：任何非0值都为“真”，只有0才为“假”。因此逻辑与也适用于数值。比如 5 &amp;&amp; 4的结果是1，为“真”；-6 &amp;&amp; 0的结果是0，为“假”</li>
-</ul>
-<p>2、||逻辑或</p>
-<p>1&gt;使用格式  条件A || 条件B</p>
-<p>2&gt;运算结果  当条件A或条件B只要有一个成立时（也包括条件A和条件B都成立），结果就为1，也就是“真”；只有当条件A和条件B都不成立时，结果才为0，也就是“假”。</p>
-<p>3&gt;运算过程  总是先判断条件A是否成立</p>
-<ul>
-<li>如果条件A成立，就不会再去判断条件B是否成立：因为条件A已经成立了，不管条件B如何，“条件A || 条件B”的结果肯定是1，也就是“真”</li>
-<li>如果条件A不成立，接着再判断条件B是否成立：如果条件B成立，“条件A || 条件B”的结果就为1，即“真”，如果条件B不成立，结果就为0，即“假”</li>
-</ul>
-<p>3、!逻辑非</p>
-<p>1&gt;使用格式  !条件A</p>
-<p>2&gt;运算结果  真的变假，假的变真</p>
-<p>4、优先级</p>
-<ul>
-<li>逻辑运算符的优先级顺序为： 小括号() &gt; 负号 - &gt;!&gt; 算术运算符 &gt; 关系运算符 &gt;&amp;&amp;&gt;||</li>
-<li>表达式!(3&gt;5) || (2<4) &&="" (6<1)="" ：先计算="" !(3="">5)、(2&lt;4)、(6&lt;1)，结果为1，式子变为1 || 1 &amp;&amp; 0，再计算1 &amp;&amp; 0，式子变为1 || 0，最后的结果为1</4)></li>
-<li>表达式3+2<5||6>3 等价于 ((3+2) &lt; 5) || (6&gt;3)，结果为1</5||6></li>
-<li>表达式4&gt;3 &amp;&amp; !-5&gt;2 等价于 (4&gt;3) &amp;&amp; ((!(-5)) &gt; 2) ，结果为0</li>
-</ul>
-<p><strong>三目运算符</strong></p>
-<p>对于条件表达式b?x:y，先计算条件b，然后进行判断。如果b的值为true，计算x的值，运算结果为x的值；否则，计算y的值，运算结果为y的值。</p>
+          C语言中的数据类型
 
-          
+存在疑问，具体参考下面评论
+变量的存储
+ 
+变量实例
+12int b = 10;int a = 20;
+
+内存由大到小寻址，优先分配内存地址较大的字节给变量。b的内存地址比a大
+每个变量都有地址：第一个字节的地址就是变量的地址
+查看内存地址用 &amp;
+
+Scanf函数
+12
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/01/C语言知识总结第一部分/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -502,10 +456,17 @@
       
         
           
-            <p>最近用Hexo弄了自己的博客，准备陆续把之前写过的文章都转移到这里</p>
-<p>以后也会在这里继续写博客，同时写一些自己的想法在里面^_^</p>
+          最近用Hexo弄了自己的博客，准备陆续把之前写过的文章都转移到这里
+以后也会在这里继续写博客，同时写一些自己的想法在里面^_^
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/28/时间匆匆，总要留下些痕迹/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
