@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C语言," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="变量的作用域 C语言根据变量作用域的不同，将变量分为局部变量和全局变量 1.局部变量 1&amp;gt; 定义：在函数内部定义的变量，称为局部变量。形式参数也属于局部变量。 2&amp;gt; 作用域：局部变量只在定义它的函数内部有效，即局部变量只有在定义它的函数内部使用，其它函数不能使用它。 2.全局变量 1&amp;gt; 定义：在所有函数外部定义的变量，称为全局变量。 2&amp;gt; 作用域：全局变量的作用范围是从定义">
+<meta name="keywords" content="C语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言知识总结第四部分">
+<meta property="og:url" content="http://MelodyZhy.github.io/2017/08/01/C语言知识总结第四部分/index.html">
+<meta property="og:site_name" content="Melody的博客">
+<meta property="og:description" content="变量的作用域 C语言根据变量作用域的不同，将变量分为局部变量和全局变量 1.局部变量 1&amp;gt; 定义：在函数内部定义的变量，称为局部变量。形式参数也属于局部变量。 2&amp;gt; 作用域：局部变量只在定义它的函数内部有效，即局部变量只有在定义它的函数内部使用，其它函数不能使用它。 2.全局变量 1&amp;gt; 定义：在所有函数外部定义的变量，称为全局变量。 2&amp;gt; 作用域：全局变量的作用范围是从定义">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-01T06:10:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言知识总结第四部分">
+<meta name="twitter:description" content="变量的作用域 C语言根据变量作用域的不同，将变量分为局部变量和全局变量 1.局部变量 1&amp;gt; 定义：在函数内部定义的变量，称为局部变量。形式参数也属于局部变量。 2&amp;gt; 作用域：局部变量只在定义它的函数内部有效，即局部变量只有在定义它的函数内部使用，其它函数不能使用它。 2.全局变量 1&amp;gt; 定义：在所有函数外部定义的变量，称为全局变量。 2&amp;gt; 作用域：全局变量的作用范围是从定义">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://MelodyZhy.github.io/2017/08/01/C语言知识总结第四部分/"/>
+
+
+
+
+
+  <title>C语言知识总结第四部分 | Melody的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Melody的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://MelodyZhy.github.io/2017/08/01/C语言知识总结第四部分/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="庄 颖">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Melody的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C语言知识总结第四部分</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-01T13:55:49+08:00">
+                2017-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>变量的作用域</strong></p>
+<p>C语言根据变量作用域的不同，将变量分为局部变量和全局变量</p>
+<p><strong>1.局部变量</strong></p>
+<p>1&gt; 定义：在函数内部定义的变量，称为局部变量。形式参数也属于局部变量。</p>
+<p>2&gt; 作用域：局部变量只在定义它的函数内部有效，即局部变量只有在定义它的函数内部使用，其它函数不能使用它。</p>
+<p><strong>2.全局变量</strong></p>
+<p>1&gt; 定义：在所有函数外部定义的变量，称为全局变量。</p>
+<p>2&gt; 作用域：全局变量的作用范围是从定义变量的位置开始到源程序结束，即全局变量可以被在其定义位置之后的其它函数所共享。</p>
+<p><strong>变量的存储类型</strong></p>
+<p>* 变量的存储类型就是指变量存储在什么地方。有3个地方可以用于存储变量：普通内存、运行时堆栈、硬件寄存器。变量的存储类型决定了变量何时创建、何时销毁以及它的值能保持多久，也就是决定了变量的生命周期。</p>
+<p>* C语言根据变量的存储类型的不同，可以把变量分为：自动变量、静态变量、寄存器变量。</p>
+<p><strong>1.自动变量</strong></p>
+<p>1&gt; 定义：自动变量是存储在堆栈中的。</p>
+<p>2&gt; 哪些是自动变量：被关键字auto修饰的局部变量都是自动变量，但是极少使用这个关键字，基本上是废的，因为所有的局部变量在默认情况下都是自动变量。</p>
+<p>3&gt; 生命周期：在程序执行到声明自动变量的代码块(函数)时，自动变量才被创建；当自动变量所在的代码块(函数)执行完毕后，这些自动变量就会自行销毁。如果一个函数被重复调用，这些自动变量每次都会重新创建。</p>
+<p><strong>2.静态变量</strong></p>
+<p>1&gt; 定义：静态变量是存储在静态内存中的，也就是不属于堆栈。</p>
+<p>2&gt; 哪些是静态变量：</p>
+<ul>
+<li>所有的全局变量都是静态变量</li>
+<li>被关键字static修饰的局部变量也是静态变量</li>
+</ul>
+<p>3&gt; 生命周期：静态变量在程序运行之前创建，在程序的整个运行期间始终存在，直到程序结束。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="keyword">int</span> a;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> b = <span class="number">0</span>;</div><div class="line">    b++;</div><div class="line">    </div><div class="line">    <span class="keyword">int</span> c = <span class="number">0</span>;</div><div class="line">    c++;</div><div class="line">     </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"b=%d, c=%d \n"</span>, b, c);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">     <span class="keyword">int</span> i;</div><div class="line">     <span class="comment">// 连续调用3次test函数</span></div><div class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i&lt;<span class="number">3</span>; i++) &#123;</div><div class="line">         test();</div><div class="line">    &#125;     </div><div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>* 第3行的变量a、第6行的变量b都是静态变量，第9行的变量c、第16行的变量i是自动变量。</p>
+<p>* 因为第6行的变量b是静态变量，所以它只会被创建一次，而且生命周期会延续到程序结束。因为它只会创建一次，所以第6行代码只会执行一次，下次再调用test函数时，变量b的值不会被重新初始化为0。</p>
+<p>* 注意：虽然第6行的变量b是静态变量，但是只改变了它的存储类型(即生命周期)，并没有改变它的作用域，变量b还是只能在test函数内部使用。</p>
+<p>* 我们在main函数中重复调用test函数3次，输出结果为： </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">b = <span class="number">1</span>, c = <span class="number">1</span></div><div class="line"></div><div class="line">b = <span class="number">2</span>, c = <span class="number">1</span></div><div class="line"></div><div class="line">b = <span class="number">3</span>, c = <span class="number">1</span></div></pre></td></tr></table></figure>
+<p><strong>3.寄存器变量</strong></p>
+<p>1&gt; 定义：存储在硬件寄存器中的变量，称为寄存器变量。寄存器变量比存储在内存中的变量访问效率更高(默认情况下，自动变量和静态变量都是放在内存中的)</p>
+<p>2&gt; 哪些变量是寄存器变量：</p>
+<ul>
+<li>被关键字register修饰的自动变量都是寄存器变量</li>
+<li>只有自动变量才可以是寄存器变量，全局变量和静态局部变量不行</li>
+<li>寄存器变量只限于int、char和指针类型变量使用</li>
+</ul>
+<p>3&gt; 生命周期：因为寄存器变量本身就是自动变量，所以函数中的寄存器变量在调用该函数时占用寄存器中存放的值，当函数结束时释放寄存器，变量消失。</p>
+<p>4&gt; 使用注意：</p>
+<ul>
+<li>由于计算机中寄存器数目有限，不能使用太多的寄存器变量。如果寄存器使用饱和时，程序将寄存器变量自动转换为自动变量处理</li>
+<li>为了提高运算速度，一般会将一些频繁使用的自动变量定义为寄存器变量，这样程序尽可能地为它分配寄存器存放，而不用内存</li>
+</ul>
+<p><strong>结构体</strong></p>
+<p>形式：</p>
+<p>struct　结构体名{<br>类型名1　成员名1;<br>类型名2　成员名2;<br>……<br>类型名n　成员名n;　　　<br>};</p>
+<p><strong>结构体变量的定义</strong></p>
+<p>1.先定义结构体类型，再定义变量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> &#123;</span></div><div class="line">    <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">int</span> age;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> <span class="title">stu</span>;</span></div></pre></td></tr></table></figure>
+<p>2.定义结构体类型的同时定义变量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> &#123;</span></div><div class="line">    <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">int</span> age;</div><div class="line">&#125; stu;</div></pre></td></tr></table></figure>
+<p>3.直接定义结构体类型变量，省略类型名</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></div><div class="line">    <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">int</span> age;</div><div class="line">&#125; stu;</div></pre></td></tr></table></figure>
+<p>结构体的注意点:</p>
+<ul>
+<li>不允许对结构体本身递归定义</li>
+<li>结构体内可以包含别的结构体</li>
+<li>定义结构体类型，只是说明了该类型的组成情况，并没有给它分配存储空间，就像系统不为int类型本身分配空间一样。只有当定义属于结构体类型的变量时，系统才会分配存储空间给该变量</li>
+<li>结构体变量占用的内存空间是其成员所占内存之和，而且各成员在内存中按定义的顺序依次排列</li>
+</ul>
+<p><strong>结构体内存结构</strong></p>
+<p>1、结构体所占用的内存与其成员的声明顺序有关，例如:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stu1</span> &#123;</span></div><div class="line">   <span class="keyword">char</span> a;   <span class="comment">//1个字节</span></div><div class="line">   <span class="keyword">char</span> b;   <span class="comment">//1个字节</span></div><div class="line">   <span class="keyword">int</span> c;    <span class="comment">//4个字节</span></div><div class="line">&#125;;</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stu2</span> &#123;</span></div><div class="line">   <span class="keyword">char</span> a;</div><div class="line">   <span class="keyword">int</span> c;</div><div class="line">   <span class="keyword">char</span> b;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">sizeof</span>(stu1) --&gt; <span class="number">8</span> ?;  <span class="comment">//和系统有关</span></div><div class="line"><span class="keyword">sizeof</span>(stu2) --&gt; <span class="number">12</span> ?; <span class="comment">//和系统有关</span></div></pre></td></tr></table></figure>
+<p><strong>2、宽度和对齐的概念</strong>：</p>
+<p>1）每个成员的宽度用sizeof即可知道，例如bool和char是1，short是2，int是4，string是8。 2）预编译命令#pragma pack(n), n=1,2,4,8,16用来指定”对齐系数”，#pragma pack()用来恢复默认。 3）数据成员对齐规则：结构体struct（或联合体union）的成员，第一个成员的偏移量为0，以后每个数据成员的偏移量取其宽度和对齐系数的最小值。 4）结构体自身对齐规则：结构体自身也要对齐，对齐按照其成员最大宽度和对齐系数的最小值。</p>
+<p>解析（#pragma pack(4)）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stu1</span> &#123;</span></div><div class="line">    <span class="keyword">char</span> a;   <span class="comment">//1个字节 偏移0</span></div><div class="line">    <span class="keyword">char</span> b;   <span class="comment">//1个字节 偏移1</span></div><div class="line">    <span class="comment">//由于对齐系数是4，这里要补充2个字节。</span></div><div class="line">    <span class="keyword">int</span> c;    <span class="comment">//4个字节 偏移4</span></div><div class="line">&#125;;</div><div class="line">  <span class="keyword">sizeof</span>(stu1) --&gt; <span class="number">8</span></div><div class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">stu2</span> &#123;</span></div><div class="line">    <span class="keyword">char</span> a; <span class="comment">//1个字节，偏移0，占1个字节</span></div><div class="line">    <span class="comment">//由于对齐系数是4，这里要补充3个字节</span></div><div class="line">    <span class="keyword">int</span> c;  <span class="comment">//4个字节，偏移4</span></div><div class="line">    <span class="keyword">char</span> b; <span class="comment">//1个字节，偏移8</span></div><div class="line">    <span class="comment">//由于对齐系数是4，这里要补充3个字节</span></div><div class="line">&#125;;</div><div class="line"> <span class="keyword">sizeof</span>(stu2) --&gt; <span class="number">12</span></div></pre></td></tr></table></figure>
+<p><strong>结构体的初始化</strong></p>
+<p>将各成员的初值，按顺序地放在一对大括号{}中，并用逗号分隔，一一对应赋值。</p>
+<p>比如初始化Student结构体变量stu</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> &#123;</span></div><div class="line">    <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">int</span> age;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> <span class="title">stu</span> = &#123;</span><span class="string">"Zhy"</span>, <span class="number">23</span>&#125;;</div></pre></td></tr></table></figure>
+<p>只能在定义变量的同时进行初始化赋值，初始化赋值和变量的定义不能分开，下面的做法是错误的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> <span class="title">stu</span>;</span></div><div class="line">stu = &#123;<span class="string">"Zhy"</span>, <span class="number">23</span>&#125;;</div></pre></td></tr></table></figure>
+<p><strong>结构体的使用</strong></p>
+<ul>
+<li>一般对结构体变量的操作是以成员为单位进行的，引用的一般形式为：<strong>结构体变量名.成员名</strong></li>
+<li>如果某个成员也是结构体变量，可以连续使用成员运算符”.”访问最低一级成员</li>
+<li>相同类型的结构体变量之间可以进行整体赋值</li>
+</ul>
+<p><strong>结构体数组</strong></p>
+<p>定义方式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> &#123;</span></div><div class="line">    <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">int</span> age;</div><div class="line">&#125;;</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> <span class="title">stu</span>[5];</span> <span class="comment">//第一种</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> &#123;</span></div><div class="line">    <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">int</span> age;</div><div class="line">&#125; stu[<span class="number">5</span>]; <span class="comment">//第二种</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></div><div class="line">    <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">int</span> age;</div><div class="line">&#125; stu[<span class="number">5</span>]; <span class="comment">//第三种</span></div></pre></td></tr></table></figure>
+<p>初始化</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></div><div class="line">    <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">int</span> age;</div><div class="line">&#125; stu[<span class="number">2</span>] = &#123; &#123;<span class="string">"Zhy"</span>, <span class="number">23</span>&#125;, &#123;<span class="string">"zz"</span>, <span class="number">18</span>&#125; &#125;;</div></pre></td></tr></table></figure>
+<p><strong>结构体作为函数参数</strong></p>
+<p>将结构体变量作为函数参数进行传递时，其实传递的是全部成员的值，也就是将实参中成员的值一一赋值给对应的形参成员。因此，形参的改变不会影响到实参</p>
+<p><strong>指向结构体的指针</strong></p>
+<p>* 每个结构体变量都有自己的存储空间和地址，因此指针也可以指向结构体变量</p>
+<p>* 结构体指针变量的定义形式：struct 结构体名称 *指针变量名</p>
+<p>* 有了指向结构体的指针，那么就有3种访问结构体成员的方式</p>
+<ul>
+<li>结构体变量名.成员名</li>
+<li>(*指针变量名).成员名</li>
+<li>指针变量名-&gt;成员名</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</div><div class="line">    <span class="comment">// 定义一个结构体类型</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Student</span> &#123;</span></div><div class="line">        <span class="keyword">char</span> *name;</div><div class="line">        <span class="keyword">int</span> age;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    <span class="comment">// 定义一个结构体变量</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Student</span> <span class="title">stu</span> = &#123;</span><span class="string">"Zhy"</span>, <span class="number">23</span>&#125;;</div><div class="line">    </div><div class="line">    <span class="comment">// 定义一个指向结构体的指针变量</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">p</span>;</span></div><div class="line">    </div><div class="line">    <span class="comment">// 指向结构体变量stu</span></div><div class="line">    p = &amp;stu;</div><div class="line"></div><div class="line">    <span class="comment">/*</span></div><div class="line"><span class="comment">     这时候可以用3种方式访问结构体的成员</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="comment">// 方式1：结构体变量名.成员名</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"name=%s, age = %d \n"</span>, stu.name, stu.age);</div><div class="line">    </div><div class="line">    <span class="comment">// 方式2：(*指针变量名).成员名</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"name=%s, age = %d \n"</span>, (*p).name, (*p).age);</div><div class="line">    </div><div class="line">    <span class="comment">// 方式3：指针变量名-&gt;成员名</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"name=%s, age = %d \n"</span>, p-&gt;name, p-&gt;age);</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>枚举</strong></p>
+<p>概念：枚举是C语言中的一种基本数据类型，并不是构造类型，它可以用于声明一组常数。当一个变量有几个固定的可能取值时，可以将这个变量定义为枚举类型。</p>
+<p>例如：可以用一个枚举类型的变量描述星期，因为星期只有7中可能星期一至星期日</p>
+<p><strong>枚举类型的定义</strong></p>
+<p>一般形式为：enum　枚举名　{枚举元素1,枚举元素2,……};</p>
+<p>1.先定义枚举类型，再定义枚举变量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Season &#123;spring, summer, autumn, winter&#125;;</div><div class="line"></div><div class="line"><span class="keyword">enum</span> Season s;</div></pre></td></tr></table></figure>
+<p>2.定义枚举类型的同时定义枚举变量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Season &#123;spring, summer, autumn, winter&#125; s;</div></pre></td></tr></table></figure>
+<p>3.省略枚举名称，直接定义枚举变量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> &#123;spring, summer, autumn, winter&#125; s;</div></pre></td></tr></table></figure>
+<p>上面三种方式定义的都是枚举变量s</p>
+<p><strong>枚举使用注意</strong></p>
+<p>1&gt; C语言编译器会将枚举元素(spring、summer等)作为整型常量处理，称为枚举常量。</p>
+<p>2&gt; 枚举元素的值取决于定义时各枚举元素排列的先后顺序。默认情况下，第一个枚举元素的值为0，第二个为1，依次顺序加1。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Season &#123;spring, summer, autumn, winter&#125;;</div></pre></td></tr></table></figure>
+<p>也就是说spring的值为0，summer的值为1，autumn的值为2，winter的值为3</p>
+<p>3&gt; 也可以在定义枚举类型时改变枚举元素的值</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> season &#123;spring, summer=<span class="number">3</span>, autumn, winter&#125;;</div></pre></td></tr></table></figure>
+<p>没有指定值的枚举元素，其值为前一元素加1。也就说spring的值为0，summer的值为3，autumn的值为4，winter的值为5</p>
+<p><strong>枚举基本操作</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Season &#123;spring, summer, autumn, winter&#125; s;</div><div class="line"></div><div class="line">s = spring; <span class="comment">// 等价于 s = 0;</span></div><div class="line"></div><div class="line">s = <span class="number">3</span>; <span class="comment">// 等价于 s = winter;</span></div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C语言/" rel="tag"># C语言</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/01/C语言知识总结第三部分/" rel="next" title="C语言知识总结第三部分">
+                <i class="fa fa-chevron-left"></i> C语言知识总结第三部分
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/01/C语言知识总结第五部分/" rel="prev" title="C语言知识总结第五部分">
+                C语言知识总结第五部分 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="庄 颖" />
+          <p class="site-author-name" itemprop="name">庄 颖</p>
+           
+              <p class="site-description motion-element" itemprop="description">走别人的路不会留下自己的脚印</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">庄 颖</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

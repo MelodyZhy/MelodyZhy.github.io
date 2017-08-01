@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Objective-C," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="每一个实例变量定义两个方法：设置变量的setter方法 获取变量值的getter方法 set方法的书写规范  set方法一定是一个对象方法 set方法一定不能有返回值 set方法必须以set开头 set之后跟的是 实例变量去掉下划线，并且首字母大写 set方法一定有参数，而且参数的类型和实例变量的类型一致 set方法的形参名 一般是 去掉下划线的实例变量名 形参名不能和 实例变量名同名 set方法">
+<meta name="keywords" content="Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Objective-C知识总结第二部分">
+<meta property="og:url" content="http://MelodyZhy.github.io/2017/08/01/Objective-C知识总结第二部分/index.html">
+<meta property="og:site_name" content="Melody的博客">
+<meta property="og:description" content="每一个实例变量定义两个方法：设置变量的setter方法 获取变量值的getter方法 set方法的书写规范  set方法一定是一个对象方法 set方法一定不能有返回值 set方法必须以set开头 set之后跟的是 实例变量去掉下划线，并且首字母大写 set方法一定有参数，而且参数的类型和实例变量的类型一致 set方法的形参名 一般是 去掉下划线的实例变量名 形参名不能和 实例变量名同名 set方法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-01T06:55:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Objective-C知识总结第二部分">
+<meta name="twitter:description" content="每一个实例变量定义两个方法：设置变量的setter方法 获取变量值的getter方法 set方法的书写规范  set方法一定是一个对象方法 set方法一定不能有返回值 set方法必须以set开头 set之后跟的是 实例变量去掉下划线，并且首字母大写 set方法一定有参数，而且参数的类型和实例变量的类型一致 set方法的形参名 一般是 去掉下划线的实例变量名 形参名不能和 实例变量名同名 set方法">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://MelodyZhy.github.io/2017/08/01/Objective-C知识总结第二部分/"/>
+
+
+
+
+
+  <title>Objective-C知识总结第二部分 | Melody的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Melody的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://MelodyZhy.github.io/2017/08/01/Objective-C知识总结第二部分/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="庄 颖">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Melody的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Objective-C知识总结第二部分</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-01T14:46:46+08:00">
+                2017-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>每一个实例变量定义两个方法：设置变量的setter方法 获取变量值的getter方法</p>
+<p>set方法的书写规范</p>
+<ol>
+<li>set方法一定是一个对象方法</li>
+<li>set方法一定不能有返回值</li>
+<li>set方法必须以set开头</li>
+<li>set之后跟的是 实例变量去掉下划线，并且首字母大写</li>
+<li>set方法一定有参数，而且参数的类型和实例变量的类型一致</li>
+<li>set方法的形参名 一般是 去掉下划线的实例变量名</li>
+<li>形参名不能和 实例变量名同名</li>
+<li>set方法实现中，一定要用形参给实例变量赋值</li>
+</ol>
+<p>get方法的书写规范</p>
+<ol>
+<li>get方法一定是一个对象方法</li>
+<li>get方法一定有返回值，返回值的类型和实例变量的类型要一致</li>
+<li>get方法的方法名 是去掉下划线的实例变量名</li>
+<li>get方法一定没有参数</li>
+<li>get方法的实现中，一定是返回实例变量值</li>
+</ol>
+<p>下面演示set和get方法的代码</p>
+<p>我们创建一个Person类在.h文件中的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface Person : NSObject</div><div class="line">&#123;</div><div class="line">    NSString *_name;</div><div class="line">    int _age;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 成员变量_name的setter方法和getter方法的声明</div><div class="line">- (void)setName:(NSString *)name;</div><div class="line">- (NSString *)name;</div><div class="line"></div><div class="line">// 成员变量_age的setter方法和getter方法的声明</div><div class="line">- (void)setAge:(int)age;</div><div class="line">- (int)age;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>.m文件中的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">#import &quot;Person.h&quot;</div><div class="line"></div><div class="line">@implementation Person</div><div class="line"></div><div class="line">// 成员变量_name的setter方法和getter方法的实现</div><div class="line">- (void)setName:(NSString *)name</div><div class="line">&#123;</div><div class="line">    _name = name;</div><div class="line">    </div><div class="line">&#125;</div><div class="line">- (NSString *)name</div><div class="line">&#123;</div><div class="line">    return _name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 成员变量_age的setter方法和getter方法的实现</div><div class="line">- (void)setAge:(int)age</div><div class="line">&#123;</div><div class="line">    //在这可以限制输入的年龄是否合法</div><div class="line">    if (age &gt;= 18) &#123;</div><div class="line">        _age = age;</div><div class="line">    &#125; else &#123;</div><div class="line">        _age = 18;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line">- (int)age</div><div class="line">&#123;</div><div class="line">    return _age;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>OC中没有方法的重载，所谓的参数多一个是因为方法的名称变了，提示：do: : : :</p>
+<p>OC中static关键字的使用：唯一要注意的是成员变量不能定义成static，其它时候的使用跟C语言中一样，请看我之前的博客    <a href="http://www.cnblogs.com/melodyzhy/p/4667805.html" target="_blank" rel="external">&gt;—点我就能看到—&lt;</a></p>
+<p>OC中的self关键字，self用到类方法中代表本类，self用到对象方法中表示这个对象</p>
+<p>self修饰变量：会访问成员变量请看代码：(依然根据Person类)在.m文件中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// 成员变量_name的setter方法和getter方法的实现</div><div class="line">- (void)setName:(NSString *)name</div><div class="line">&#123;</div><div class="line">      self-&gt;speed = speed;</div><div class="line">//   self-&gt;speed等价于_name</div><div class="line">//    _name = name;</div><div class="line">    </div><div class="line">&#125;</div><div class="line">- (NSString *)name</div><div class="line">&#123;</div><div class="line">    return _name;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里再次说一下关于面对对象的四大特性分别为</p>
+<p>1.抽象   2.封装    3.继承    4.多态</p>
+<p>抽象性：抽象就是忽略一个主题中与当前目标无关的那些方面，以便更充分地注意与当前目标有关的方面。抽象并不打算了解全部问题，而只是选择其中的一部分，暂时不用部分细节。比如，我们要设计一个学生成绩管理系统，考察学生这个对象时，我们只关心他的班级、学号、成绩等，而不用去关心他的身高、体重这些信息。抽象包括两个方面，一是过程抽象，二是数据抽象。过程抽象是指任何一个明确定义功能的操作都可被使用者看作单个的实体看待，尽管这个操作实际上可能由一系列更低级的操作来完成。数据抽象定义了数据类型和施加于该类型对象上的操作，并限定了对象的值只能通过使用这些操作修改和观察。 </p>
+<p>有关于封装，继承，多态请看我之前的博客(还介绍了分类)    <a href="http://www.cnblogs.com/melodyzhy/p/4626380.html" target="_blank" rel="external">&gt;—请点击这里—&lt;</a></p>
+<p>成员变量修饰符的介绍</p>
+<ul>
+<li>@public     公开的， 在任何地方通过实例对象都可以访问</li>
+<li>@private    私有的，表示只能在当前类中使用  不可以在子类中使用 但是被子类继承的</li>
+<li>@protected  受保护类型，表示只能在当前类和子类中访问（默认是protected）</li>
+</ul>
+<p>description方法：重写父类的description方法可以改变NSLog的输出</p>
+<p>如果在-description方法中使用NSLog打印self 会造成死循环</p>
+<p>代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//重写父类的description</div><div class="line">-(NSString *)description&#123;</div><div class="line"></div><div class="line">  //  do something....</div><div class="line"></div><div class="line">  // 例如  return [NSString stringWithFormat:&lt;#(NSString *), ...#&gt;];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>类的本质是对象 </p>
+<p>类对象属于Class类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 获取类对象的2种方式</div><div class="line">Class c = [Person class]; // 类方法</div><div class="line">// 或者</div><div class="line">Person *p = [Person new];</div><div class="line">Class c2 = [p class]; // 对象方法</div></pre></td></tr></table></figure>
+<p>类方法中不能调用成员变量</p>
+<p>SEL</p>
+<p>1.方法的存储位置</p>
+<ul>
+<li>每个类的方法列表都存储在类对象中</li>
+<li>每个方法都有一个与之对应的SEL类型的对象</li>
+<li>根据一个SEL对象就可以找到方法的地址，进而调用方法</li>
+<li>SEL类型的定义</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_selector     *SEL;</div></pre></td></tr></table></figure>
+<p>2.SEL对象的创建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SEL s = @selector(test);</div><div class="line">SEL s2 = NSSelectorFromString(@&quot;test&quot;);</div></pre></td></tr></table></figure>
+<p>3.SEL对象的其他用法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 将SEL对象转为NSString对象</div><div class="line">NSString *str = NSStringFromSelector(@selector(test));</div><div class="line"></div><div class="line">Person *p = [Person new];</div><div class="line">// 调用对象p的test方法</div><div class="line">[p performSelector:@selector(test)];</div></pre></td></tr></table></figure>
+<p>OC中的点语法 是Xcode的特性，Xcode帮我们做代码替换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// Xcode会帮我们把下面的代码替换成[person setAge:18];</div><div class="line">person.age = 18;</div><div class="line"></div><div class="line">// Xcode会帮我们把下面的代码替换成[person age]；</div><div class="line">int a = person.age;</div></pre></td></tr></table></figure>
+<p>@property 和 @synthesize</p>
+<p>@property 编译器指令，编译器帮我们会进行_age _name get/set方法的声明</p>
+<p>@synthesize帮我们实现了 实例变量的get和set方法</p>
+<p>Xcode4.4之后@property既可以帮我进行_age _name get/set方法的声明，也可以实现实例变量的get和set方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, assign) int age;</div><div class="line">@property (nonatomic, copy) NSString *name;</div></pre></td></tr></table></figure>
+<p>id是万能指针，可以指向任何对象</p>
+<p>OC中的构造方法</p>
+<p>重写构造方法，让对象创建成功后，就有初始的值</p>
+<p>OC中给对象进行初始化的方法是：init对象方法  该方法返回的是一个对象（调用init方法的对象）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// 当子类把父类的init覆盖了，这是默认的先执行子类的</div><div class="line">- (instancetype)init&#123;</div><div class="line"></div><div class="line">    //先让父类把父类原来做的事情做完</div><div class="line">    self = [super init];</div><div class="line">    </div><div class="line">    //判断父类是否初始化成功</div><div class="line">    if (self) &#123;</div><div class="line">        </div><div class="line">        //此处写子类初始化的内容</div><div class="line">        _age = 18;  //给年龄设置为默认值 18岁</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    return self; //self指代的事方法的调用者</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>自定义构造方法</p>
+<p>.h文件代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface Person : NSObject</div><div class="line">@property (nonatomic, copy) NSString* name;</div><div class="line">@property (nonatomic, assign) int age;</div><div class="line">// 自定义构造方法</div><div class="line">- (instancetype)initWithName:(NSString *)name andAge:(int)age;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>.m文件代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#import &quot;Person.h&quot;</div><div class="line"></div><div class="line">@implementation Person</div><div class="line">- (instancetype)initWithName:(NSString *)name andAge:(int)age&#123;</div><div class="line"></div><div class="line">    if (self = [super init]) &#123;</div><div class="line">        _name = name;</div><div class="line">        _age = age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Objective-C/" rel="tag"># Objective-C</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/01/Objective-C知识总结第一部分/" rel="next" title="Objective-C知识总结第一部分">
+                <i class="fa fa-chevron-left"></i> Objective-C知识总结第一部分
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/01/Objective-C知识总结第三部分/" rel="prev" title="Objective-C知识总结第三部分">
+                Objective-C知识总结第三部分 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="庄 颖" />
+          <p class="site-author-name" itemprop="name">庄 颖</p>
+           
+              <p class="site-description motion-element" itemprop="description">走别人的路不会留下自己的脚印</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">庄 颖</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
