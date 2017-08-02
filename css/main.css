@@ -1121,6 +1121,16 @@ pre .javascript .function {
   -o-transform: rotate(30deg);
   transform: rotate(30deg);
 }
+.post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+  border-bottom: 1px solid #0593d3;
+}
+.post-body p a:hover {
+  color: #fc6423;
+  border-bottom: none;
+  border-bottom: 1px solid #fc6423;
+}
 .posts-expand {
   padding-top: 40px;
 }
@@ -1561,16 +1571,6 @@ pre .javascript .function {
   display: inline-block;
   margin: 0.8em 2em 0 2em;
 }
-#wechat:hover p {
-  animation: roll 0.1s infinite linear;
-  -webkit-animation: roll 0.1s infinite linear;
-  -moz-animation: roll 0.1s infinite linear;
-}
-#alipay:hover p {
-  animation: roll 0.1s infinite linear;
-  -webkit-animation: roll 0.1s infinite linear;
-  -moz-animation: roll 0.1s infinite linear;
-}
 @-moz-keyframes roll {
   from {
     -webkit-transform: rotateZ(30deg);
@@ -1634,6 +1634,9 @@ pre .javascript .function {
     -o-transform: rotateZ(-30deg);
     transform: rotateZ(-30deg);
   }
+}
+.post-wordcount {
+  display: inline-block;
 }
 .sidebar {
   position: fixed;
@@ -1792,7 +1795,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #20e3e5;
+  background: #c478ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2581,7 +2584,7 @@ hr {
   background: #f5f5f5;
 }
 .header-inner {
-  padding: 25px 0 20px;
+  padding: 45px 0 45px;
 }
 .header-inner:before,
 .header-inner:after {
