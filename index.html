@@ -9,8 +9,21 @@
 
     <ul>
 
-       <li><a style="font-size: 24px;" href="javascript:void(0);" onclick="sendBeacon()">sendBeacon</a></li>
-       <li><a style="font-size: 24px;" href="javascript:void(0);" onclick="fetchTest()">fetch</a></li>
+       <li><a style="font-size: 28px;" href="javascript:void(0);" onclick="sendBeacon_arrayBufferView()">sendBeacon_ArrayBufferView</a></li>
+       <li><a style="font-size: 28px;" href="javascript:void(0);" onclick="sendBeacon_blob()">sendBeacon_Blob</a></li>
+       <li><a style="font-size: 28px;" href="javascript:void(0);" onclick="sendBeacon_string()">sendBeacon_DOMString</a></li>
+       <li><a style="font-size: 28px;" href="javascript:void(0);" onclick="sendBeacon_formData()">sendBeacon_FromData</a></li>
+
+       <br/><hr/>
+
+       <a href="javascript:void(0);"> 
+        <input type="file" name="file" id="file" style="display: none; visibility: hidden;" />
+        <label for="file">^_^选择文件上传^_^</label>
+      </a>
+       <li><a style="font-size: 28px;" href="javascript:void(0);" onclick="fetch_file()">fetch_file</a></li>
+       <li><a style="font-size: 28px;" href="javascript:void(0);" onclick="fetch_json()">fetch_json</a></li>
+       <li><a style="font-size: 28px;" href="javascript:void(0);" onclick="fetch_URLSearchParams()">fetch_URLSearchParams</a></li>
+       
 
     </ul>
 
