@@ -5,6 +5,8 @@
 </HEAD>
 <body>
 
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+
     <h2>测试列表</h2>
 
     <ul>
@@ -23,8 +25,27 @@
        <li><a style="font-size: 24px;" href="javascript:void(0);" onclick="fetch_file()">fetch_file</a></li>
        <li><a style="font-size: 24px;" href="javascript:void(0);" onclick="fetch_json()">fetch_json</a></li>
        <li><a style="font-size: 24px;" href="javascript:void(0);" onclick="fetch_URLSearchParams()">fetch_URLSearchParams</a></li>
-       
+
+       <br/><hr/>
+
+       <form id="uploadForm" enctype="multipart/form-data">
+        <a href="javascript:void(0);"> 
+        <input type="file" name="file" id="file" style="display: none; visibility: hidden;" />
+        <label for="file">^_^选择文件上传^_^</label>
+        <br></br>
+        </a>
+        <button id="upload" type="button" onclick="formDataUpload()" style="background-color:blue;color:white;">上传文件</button>
+       </form>
+
 
     </ul>
+
+<!-- 
+    <form id="form" action='https://www.easy-mock.com/mock/5ceb8995e545c31990ed600b/test/uploadMessage' enctype="multipart/form-data" method="post">
+      <input type="text" name="name"/>
+      <input type="file" name="file"/> 
+      <input type="submit" value="提交">
+    </form> -->
+    
 
 </body>

@@ -100,4 +100,16 @@ function fetch_URLSearchParams() {
 	}).catch(error => alert(error));
 }
 
+function formDataUpload() {
+	var url = 'https://www.easy-mock.com/mock/5ceb8995e545c31990ed600b/test/uploadMessage';
+	$.ajax({
+    url: url,
+    type: 'POST',
+    cache: false,
+    data: new FormData($('#uploadForm')[0]),
+    processData: false,
+    contentType: false
+	}).done(function(res) {
+	}).fail(function(res) {});
+}
 
