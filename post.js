@@ -68,7 +68,9 @@ function fetch_file() {
 	alert(fileField.files[0]);
 
 	formData.append('username', 'abc123');
-	formData.append('avatar', fileField.files[0]);
+	for (var i = 0; i < fileField.files.length; i++) {
+		formData.append('avatar', fileField.files[i]);
+	}
 
 	var url = 'https://www.easy-mock.com/mock/5ceb8995e545c31990ed600b/test/uploadMessage';
 	fetch(url, {
